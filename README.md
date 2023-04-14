@@ -1,7 +1,13 @@
 # symfony-api-template
 
+
 # TODO
 Replace your repo in `.github/workflows/build.yml:36`
+
+# Start dev
+```bash
+docker compose up -d web
+```
 
 ## Composer 
 Install composer 
@@ -9,8 +15,8 @@ Install composer
 docker compose run cli composer install
 ```
 
-## JWT
 
+## JWT
 Docs: https://github.com/lexik/LexikJWTAuthenticationBundle
 
 generate JWT keypair
