@@ -1,5 +1,16 @@
 # symfony-api-template
 
+# Composer 
+Install composer 
+```bash
+docker compose run cli composer install
+```
+
+# JWT
+generate JWT keypair
+```bash
+docker compose run cli php bin/console lexik:jwt:generate-keypair
+```
 
 # Entities
 Create database
