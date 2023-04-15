@@ -4,24 +4,25 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
-use Doctrine\ORM\EntityManager;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Routing\Annotation\Route;
 
-class RegisterController
+class RegisterController extends AbstractController
 {
 
     public function __construct(
-        private EntityManager $em,
         private UserPasswordHasherInterface $passwordHasher,
         private JWTTokenManagerInterface $JWTTokenManager,
         private UserRepository $userRepository,
     ) {
     }
 
+    #[Route('/api/auth/register', methods: ['POST'])]
     public function register(Request $request): JsonResponse
     {
         $content = json_decode($request->getContent(), true);
@@ -40,8 +41,7 @@ class RegisterController
         $user->setPassword($this->passwordHasher->hashPassword($user, $content['password']));
 
         try {
-            $this->em->persist($user);
-            $this->em->flush();
+            $this->userRepository->save($user, true);
         } catch (\Exception $exception) {
             return new JsonResponse(["message"=>$exception->getMessage(), "code"=>$exception->getCode()], 500);
         }

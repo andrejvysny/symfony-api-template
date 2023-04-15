@@ -5,8 +5,3 @@
 api_auth_email:
   path: /api/auth/email #Login route -> POST username, password
   methods: ["POST"]
-
-api_register:
-  path: /api/auth/register
-  methods: ["POST"]
-  controller: App\Security\ApiRegister::register
