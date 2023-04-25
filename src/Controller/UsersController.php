@@ -16,6 +16,17 @@ class UsersController extends AbstractController
 
     public function __construct(private UserRepository $userRepository)
     {
+
+        $this->registerServicesRepositories();
+        $this->registerNotificationRepositories();
+        $this->registerPaymentRepositories();
+        $this->registerScaledoRepositories();
+        $this->registerElasticSearchRepositories();
+        $this->registerDomainVendorRepositories();
+        $this->registerAuthRepositories();
+        $this->registerBusinessMailRepositories();
+        $this->registerWindowsRepositories();
+
     }
 
 
